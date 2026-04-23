@@ -27,21 +27,24 @@
 
 
     // Smooth scrolling on the navbar links
-    $(".navbar-nav a").on('click', function (event) {
-        if (this.hash !== "") {
-            event.preventDefault();
-            
-            $('html, body').animate({
-                scrollTop: $(this.hash).offset().top - 45
-            }, 1500, 'easeInOutExpo');
-            
-            if ($(this).parents('.navbar-nav').length) {
-                $('.navbar-nav .active').removeClass('active');
-                $(this).closest('a').addClass('active');
-            }
+  
+$(".navbar-nav a").on('click', function (event) {
+    if (this.hash !== "") {
+        event.preventDefault();
+
+        var target = $(this.hash);
+
+        if (target.length) {
+            $('html, body').stop().animate({
+                scrollTop: target.offset().top - 70
+            }, 900, 'swing'); // smoother + widely supported easing
         }
-    });
-    
+
+        // Active state handling
+        $(".navbar-nav a").removeClass("active");
+        $(this).addClass("active");
+    }
+});
     
     // Back to top button
     $(window).scroll(function () {
